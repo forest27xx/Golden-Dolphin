@@ -1,0 +1,4 @@
+模块,任务名,当前负责人,协作人,优先级,状态,今日目标,验收标准,截止日期,关联文档,Git 分支/提交,备注/卡点,验收人,验收结果,验收时间,影响资源,风险等级
+核心玩法,玩家基础移动,待分配,,P0,未开始,能在测试场景 WASD 移动,不能穿墙；镜头跟随；Console 无持续报错,6/18,,feature/player-move,,jun,,,Assets/Scripts/Player; Assets/Scenes/Level_Prototype.unity,中
+打包,空项目测试包,工具/集成程序,,P0,未开始,主机能打出空项目测试包,另一台电脑能打开游戏包,6/16,,feature/build-test,,jun,,,ProjectSettings; Build_Test.unity,高
+协作,每人测试分支,全员,,P0,未开始,每人在 _Sandbox 下提交测试文件,每人至少成功 push 一个 feature/test-姓名 分支,6/15,,feature/test-name,,工具/集成程序,,,Assets/_Sandbox,低
