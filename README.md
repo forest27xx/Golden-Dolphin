@@ -1,6 +1,9 @@
 # Golden Dolphin Game Jam 2026
 
-5 人协作的 Unity 单机游戏项目仓库。这个仓库先服务三件事：
+5 人协作的 Unity 单机游戏项目仓库。GitHub 远端仓库：
+`git@github.com:forest27xx/Golden-Dolphin.git`。
+
+这个仓库先服务三件事：
 
 1. 统一 Unity 项目结构和 Git 规则。
 2. 让每个人在正式开题前跑通 clone、分支、提交、推送、合并。
