@@ -55,3 +55,6 @@ AGENTS.md
 # Do not commit generated recordings unless explicitly needed for devlog.
 Recordings/
 Captures/
+
+# Local-only planning and design notes.
+docs/local/
