@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 21009de463a5ca844a6850e4ecb4fb43
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4817998977719655404
+    second: steam_logo_transparent_1280x720_0
+  - first:
+      213: 1698571595415584197
+    second: steam_logo_transparent_1280x720_1
+  - first:
+      213: -3573092510442526391
+    second: steam_logo_transparent_1280x720_2
+  - first:
+      213: -7035431847811582227
+    second: steam_logo_transparent_1280x720_3
+  - first:
+      213: -6198529457060047424
+    second: steam_logo_transparent_1280x720_4
+  - first:
+      213: 5303980950266921585
+    second: steam_logo_transparent_1280x720_5
+  - first:
+      213: -6210324612231168678
+    second: steam_logo_transparent_1280x720_6
+  - first:
+      213: -2399943148465867822
+    second: steam_logo_transparent_1280x720_7
+  - first:
+      213: -2626548617012005968
+    second: steam_logo_transparent_1280x720_8
+  - first:
+      213: -7250479349381090502
+    second: steam_logo_transparent_1280x720_9
+  - first:
+      213: 2054357222884586857
+    second: steam_logo_transparent_1280x720_10
+  - first:
+      213: 8935821502997948098
+    second: steam_logo_transparent_1280x720_11
+  - first:
+      213: -4286276634006769819
+    second: steam_logo_transparent_1280x720_12
+  - first:
+      213: 3156477716349356348
+    second: steam_logo_transparent_1280x720_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_0
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 420
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41423d4e477032db0800000000000000
+      internalID: -4817998977719655404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_1
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 289
+        width: 124
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cd705addd9829710800000000000000
+      internalID: 1698571595415584197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_2
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 370
+        width: 25
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 949e675fa43d96ec0800000000000000
+      internalID: -3573092510442526391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_3
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 281
+        width: 49
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de678bd72002d5e90800000000000000
+      internalID: -7035431847811582227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_4
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 289
+        width: 126
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c5142ecc466af9a0800000000000000
+      internalID: -6198529457060047424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_5
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 281
+        width: 185
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 172491492968b9940800000000000000
+      internalID: 5303980950266921585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_6
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 281
+        width: 70
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5d781c3bae70d9a0800000000000000
+      internalID: -6210324612231168678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_7
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 362
+        width: 124
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d33f820c60b1bed0800000000000000
+      internalID: -2399943148465867822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_8
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 270
+        width: 45
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b3b4b9e2ff9c8bd0800000000000000
+      internalID: -2626548617012005968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_9
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 270
+        width: 45
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a33b5d8427f116b90800000000000000
+      internalID: -7250479349381090502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_10
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 270
+        width: 45
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9653bcf720b828c10800000000000000
+      internalID: 2054357222884586857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_11
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 285
+        width: 67
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c66d7e105a620c70800000000000000
+      internalID: 8935821502997948098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_12
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 281
+        width: 131
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56f28fc6c161484c0800000000000000
+      internalID: -4286276634006769819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steam_logo_transparent_1280x720_13
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 263
+        width: 793
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c39807062cf0ecb20800000000000000
+      internalID: 3156477716349356348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      steam_logo_transparent_1280x720_0: -4817998977719655404
+      steam_logo_transparent_1280x720_1: 1698571595415584197
+      steam_logo_transparent_1280x720_10: 2054357222884586857
+      steam_logo_transparent_1280x720_11: 8935821502997948098
+      steam_logo_transparent_1280x720_12: -4286276634006769819
+      steam_logo_transparent_1280x720_13: 3156477716349356348
+      steam_logo_transparent_1280x720_2: -3573092510442526391
+      steam_logo_transparent_1280x720_3: -7035431847811582227
+      steam_logo_transparent_1280x720_4: -6198529457060047424
+      steam_logo_transparent_1280x720_5: 5303980950266921585
+      steam_logo_transparent_1280x720_6: -6210324612231168678
+      steam_logo_transparent_1280x720_7: -2399943148465867822
+      steam_logo_transparent_1280x720_8: -2626548617012005968
+      steam_logo_transparent_1280x720_9: -7250479349381090502
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
