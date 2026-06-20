@@ -14,6 +14,7 @@
 .idea/
 *.csproj
 *.sln
+*.slnx
 *.user
 *.userprefs
 *.pidb
@@ -38,6 +39,8 @@ Desktop.ini
 .env.*
 *.log
 .tools/
+.agents/
+AGENTS.md
 
 # Local packages and exports
 *.unitypackage
