@@ -40,6 +40,7 @@ Desktop.ini
 *.log
 .tools/
 .agents/
+.codex/
 AGENTS.md
 
 # Local packages and exports
