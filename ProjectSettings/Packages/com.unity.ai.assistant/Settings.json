@@ -3,5 +3,6 @@
     "CheckpointEnabled": false,
     "GitInstanceTypeValue": 0,
     "CustomGitPath": "",
-    "CheckpointRetentionWeeks": 2
+    "CheckpointRetentionWeeks": 2,
+    "PlanExecutionPromptDismissed": false
 }
