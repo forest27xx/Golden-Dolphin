@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关卡测试工具 · 手动验收指南 (Task #5)</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #181b22;
+    --panel-2: #1f232c;
+    --border: #2a2f3a;
+    --text: #e6e9ef;
+    --muted: #9aa3b2;
+    --accent: #5b9dff;
+    --ok: #3ecf8e;
+    --warn: #f0b429;
+    --danger: #ff6b6b;
+    --code-bg: #11141a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 24px 96px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 8px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 14px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .meta-row code { color: var(--accent); }
+
+  .progress-bar-wrap { position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 14px 0 10px; margin-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .progress-bar { height: 10px; background: var(--panel-2); border-radius: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--ok)); transition: width .3s ease; }
+  .progress-label { font-size: 13px; color: var(--muted); margin-top: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .reset-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+  .reset-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .callout { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 14px 16px; margin: 18px 0; font-size: 14px; }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout strong { color: var(--text); }
+
+  section.phase { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; margin: 20px 0; overflow: hidden; }
+  .phase-head { padding: 16px 20px; background: var(--panel-2); display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+  .phase-head h2 { font-size: 17px; margin: 0; flex: 1; }
+  .phase-badge { font-size: 12px; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; }
+  .phase-body { padding: 8px 20px 18px; }
+
+  .step { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px dashed var(--border); }
+  .step:last-child { border-bottom: none; }
+  .step input[type=checkbox] { appearance: none; min-width: 22px; height: 22px; margin-top: 2px; border: 2px solid var(--border); border-radius: 6px; cursor: pointer; position: relative; background: var(--bg); transition: all .15s; }
+  .step input[type=checkbox]:checked { background: var(--ok); border-color: var(--ok); }
+  .step input[type=checkbox]:checked::after { content: "✓"; position: absolute; color: #06210f; font-weight: 700; font-size: 14px; left: 4px; top: -1px; }
+  .step-body { flex: 1; }
+  .step.done .step-body { opacity: .55; }
+  .step.done .do { text-decoration: line-through; }
+  .do { font-weight: 600; }
+  .expect { margin-top: 6px; font-size: 13.5px; color: var(--muted); }
+  .expect b { color: var(--ok); font-weight: 600; }
+  code, kbd { background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 12.5px; color: #d7e0f5; }
+  kbd { box-shadow: 0 1px 0 var(--border); }
+  .path { color: var(--accent); }
+
+  footer { margin-top: 30px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 18px; }
+  .ok-text { color: var(--ok); }
+  .warn-text { color: var(--warn); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>关卡测试工具 · 手动验收指南</h1>
+    <div class="sub">程序任务 #5「关卡数值编辑器 / 测试工具」— feature/level-test-tools</div>
+    <div class="meta-row">
+      <span>分支 <code>feature/level-test-tools</code></span>
+      <span>Unity <code>6000.3.18f1</code></span>
+      <span>worktree <code>Golden-Dolphin-level-tools</code></span>
+    </div>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
+    <div class="progress-label">
+      <span id="progressText">0 / 0 步完成</span>
+      <button class="reset-btn" onclick="resetAll()">重置勾选</button>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>开始前</strong>：用 Unity Hub 以 <code>6000.3.18f1</code> 打开 <span class="path">Golden-Dolphin-level-tools</span> 这个 worktree。
+    本工具是<strong>纯编辑器工具</strong>，不改游戏运行逻辑，不进正式构建。勾选框状态会自动存到本地浏览器（刷新不丢）。
+  </div>
+
+  <div class="callout warn">
+    <strong>验收口径</strong>：每一步给了「操作」和 <b class="ok-text">预期</b>。任何一步出现 Console 报错（红色 error），记下<strong>完整报错</strong>再来找我，不要只说"报错了"。
+  </div>
+
+  <!-- ============ Phase 0 ============ -->
+  <section class="phase">
+    <div class="phase-head" onclick="togglePhase(this)">
+      <h2>阶段 0 · 打开工具窗口</h2>
+      <span class="phase-badge">冒烟</span>
+    </div>
+    <div class="phase-body">
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">菜单栏点 <kbd>Memory Tower ▸ Level Test Tools</kbd></span>
+          <div class="expect"><b>预期</b>：弹出 "Level Test" 窗口，顶部是「关卡数值总览（只读）」表格，列出 <b>5 关</b>（教学关 / 普通关1-3 / 最终关），每行末尾有「进入」按钮。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">核对表格数值与下方对照</span>
+          <div class="expect">
+            教学关 2×3 · 阈值8 · 行动5 · 碎片1 · 核心关 -<br>
+            普通关1 3×4 · 阈值10 · 行动6 · 碎片2 · -<br>
+            普通关2 4×4 · 阈值12 · 行动8 · 碎片3 · -<br>
+            普通关3 5×5 · 阈值14 · 行动9 · 碎片4 · -<br>
+            最终关 5×5 · 阈值18 · 行动8 · 碎片1 · <b>核心关 ✓</b><br>
+            表格下方应有一行：<b>手牌：初始 5 / 上限 7（全局）</b>
+          </div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">把鼠标悬停到某行「初始牌组」的数字上</span>
+          <div class="expect"><b>预期</b>：浮现 tooltip，显示该关完整的初始牌组卡牌 id 列表（逗号分隔）。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">看「运行时控制」区（窗口下半部）</span>
+          <div class="expect"><b>预期</b>：当前非 Play，应显示灰字 <b>「进入 Play 后可用」</b>，没有可点的按钮。</div>
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ============ Phase 1 ============ -->
+  <section class="phase">
+    <div class="phase-head" onclick="togglePhase(this)">
+      <h2>阶段 1 · 选关进 Play（干净状态）</h2>
+      <span class="phase-badge">核心</span>
+    </div>
+    <div class="phase-body">
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">在「普通关2」那一行点 <kbd>进入</kbd></span>
+          <div class="expect"><b>预期</b>：自动打开 <span class="path">Assets/_Project/Scenes/Game.unity</span> 并进入 Play 模式（若当前场景有未保存改动，会先弹保存确认——正常保存即可）。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">观察游戏从哪一关开始</span>
+          <div class="expect"><b>预期</b>：直接从<b>普通关2</b>开始，建筑是 <b>4×4</b> 网格，HUD 显示该关的坍塌阈值/行动数，<b>不是</b>从教学关开始。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">试着出一张功能牌（如「连锁震动 / 支点切除」）</span>
+          <div class="expect"><b>预期</b>：手牌里能用上功能牌 —— 因为选关时自动「重置进度 + 全卡解锁」，不需要先通关解锁。这验证了干净可复现的起始状态。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">看 Console</span>
+          <div class="expect"><b>预期</b>：进 Play 全程<b>无红色 error</b>。</div>
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ============ Phase 2 ============ -->
+  <section class="phase">
+    <div class="phase-head" onclick="togglePhase(this)">
+      <h2>阶段 2 · 一次性消费验证</h2>
+      <span class="phase-badge">回归</span>
+    </div>
+    <div class="phase-body">
+      <div class="callout" style="margin:10px 0;">这一步证明：选关只生效<strong>一次</strong>，之后正常按 Play 不会被上次选的关「劫持」。</div>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">退出 Play（再点一次 Play 按钮停止）</span>
+          <div class="expect"><b>预期</b>：回到编辑模式，无报错。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">这次<b>不经过工具窗口</b>，直接按 Unity 顶部的 <kbd>▶ Play</kbd></span>
+          <div class="expect"><b>预期</b>：游戏从<b>教学关</b>（2×3 网格）开始 —— 回到默认起点，<b>没有</b>被上次的「普通关2」劫持。这说明选关索引读完即清。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">停止 Play</span>
+          <div class="expect"><b>预期</b>：无报错。</div>
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ============ Phase 3 ============ -->
+  <section class="phase">
+    <div class="phase-head" onclick="togglePhase(this)">
+      <h2>阶段 3 · 运行时控制（Play 中）</h2>
+      <span class="phase-badge">核心</span>
+    </div>
+    <div class="phase-body">
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">用工具窗口「进入」任意一关（或顶部 ▶ Play），进入 Play</span>
+          <div class="expect"><b>预期</b>：进入 Play 后，工具窗口「运行时控制」区出现三个可点按钮：<b>重置本关 / 下一关 / 返回菜单</b>。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">点 <kbd>下一关</kbd></span>
+          <div class="expect"><b>预期</b>：切换到下一关（如教学关→普通关1），建筑网格和 HUD 数值相应变化。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">先出一两张牌改变局面，再点 <kbd>重置本关</kbd></span>
+          <div class="expect"><b>预期</b>：当前关重新开始（建筑、手牌、坍塌值、行动数都回到本关初始状态），关卡<b>不变</b>。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">点 <kbd>返回菜单</kbd></span>
+          <div class="expect"><b>预期</b>：切换到 MainMenu 场景，无报错。</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">停止 Play，再看「运行时控制」区</span>
+          <div class="expect"><b>预期</b>：三个按钮消失，恢复成灰字「进入 Play 后可用」。</div>
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ============ Phase 4 ============ -->
+  <section class="phase">
+    <div class="phase-head" onclick="togglePhase(this)">
+      <h2>阶段 4 · 自检 + 边界（可选）</h2>
+      <span class="phase-badge">可选</span>
+    </div>
+    <div class="phase-body">
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">菜单点 <kbd>Memory Tower ▸ Self-Test Level Boot</kbd></span>
+          <div class="expect"><b>预期</b>：Console 出现 <code>Level boot self-test passed.</code>，无异常。（验证一次性消费逻辑）</div>
+        </span>
+      </label>
+      <label class="step">
+        <input type="checkbox">
+        <span class="step-body">
+          <span class="do">Play 中但当前场景<b>不是</b> Game（如停在 MainMenu）时，看运行时控制区</span>
+          <div class="expect"><b>预期</b>：显示提示「当前场景无 LevelManager」，按钮不可用 —— 而不是报错或空指针。</div>
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <footer>
+    <p><span class="ok-text">全部通过</span> → 回来跟我说一声，我们再决定是否开 PR 合入。<br>
+    <span class="warn-text">任何一步不符</span> → 把<strong>步骤编号 + 完整 Console 报错</strong>发我，我来排查。</p>
+    <p>对应规格 <code>docs/superpowers/specs/2026-06-24-level-test-tools-design.md</code> · 实现计划与 MCP 验收记录 <code>docs/superpowers/plans/2026-06-25-level-test-tools.md</code></p>
+  </footer>
+</div>
+
+<script>
+  const STORAGE_KEY = "leveltest-manual-v1";
+  const boxes = () => Array.from(document.querySelectorAll('.step input[type=checkbox]'));
+
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(boxes().map(b => b.checked)));
+  }
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      boxes().forEach((b, i) => { if (s[i]) b.checked = true; });
+    } catch (e) {}
+  }
+  function refresh() {
+    const all = boxes();
+    const done = all.filter(b => b.checked).length;
+    document.getElementById('fill').style.width = all.length ? (done / all.length * 100) + "%" : "0%";
+    document.getElementById('progressText').textContent = done + " / " + all.length + " 步完成";
+    all.forEach(b => b.closest('.step').classList.toggle('done', b.checked));
+  }
+  function togglePhase(head) {
+    const body = head.nextElementSibling;
+    body.style.display = (body.style.display === 'none') ? 'block' : 'none';
+  }
+  function resetAll() {
+    boxes().forEach(b => b.checked = false);
+    save(); refresh();
+  }
+  document.addEventListener('change', e => {
+    if (e.target.matches('.step input[type=checkbox]')) { save(); refresh(); }
+  });
+  load(); refresh();
+</script>
+</body>
+</html>
