@@ -476,3 +476,27 @@ git commit -m "docs: record level test tools acceptance (task #5)"
 - `LevelTestBoot` 与 `LevelManager` 钩子的 `#if UNITY_EDITOR` 边界必须严格对齐（调用点与被调类同生共灭）；Task 1/2 的编译检查即在验证这一点。
 - 本任务**不**把 AGENTS.md 重新纳入版本控制（它已被 main 的 `.gitignore` 忽略，仅作本地参考）。
 - 本任务**不**向 `main` 推送任何 AGENTS.md 修复——那是 Trace（任务 #1）的职责范围。
+
+---
+
+## 验收记录（2026-06-25，MCP 实跑）
+
+实例：Golden-Dolphin-level-tools @ Unity 6000.3.18f1。全程 0 error CS / 0 exception。
+
+**改动文件**（feature/level-test-tools，commits 61b9d1e..9f6fe91）：
+- `Assets/_Project/Scripts/Core/LevelTestBoot.cs`（新建，整类 `#if UNITY_EDITOR`）
+- `Assets/_Project/Scripts/Core/LevelManager.cs`（Start() 插入一段 `#if UNITY_EDITOR` 调用，唯一触碰的游戏源码）
+- `Assets/_Project/Scripts/Editor/LevelBootSelfTest.cs`（新建，菜单自检）
+- `Assets/_Project/Scripts/Editor/LevelTestWindow.cs`（新建，EditorWindow）
+
+**验证结果**：
+1. 选关进 Play（干净状态）：SetTarget(2) → 打开 Game.unity → 进 Play。结果 `currentLevel.id=level_02, rows=4, cols=4`；`unlockedCards=8/8`（全解锁）；`requestedLevelIndex=2`；SessionState 消费后 = 空（一次性消费已 Erase）。✅
+2. 一次性消费：退 Play，不设目标再进 Play → `currentLevel.id=tutorial`（index 0），未被上次 level_02 劫持。✅
+3. 运行时控制：Play 中 `NextLevel()` tutorial→level_01；`RetryLevel()` 停在 level_01（重开本关）。`ReturnToMenu()` 为简单 LoadScene("MainMenu")，方法已由窗口绑定，未实际触发以免扰动。✅
+4. 菜单自检 `Memory Tower/Self-Test Level Boot` 在 Task 3 实跑输出 `Level boot self-test passed.`。✅
+5. 窗口 `Memory Tower/Level Test Tools` 在 Task 4 实跑成功打开（720×552），无 IMGUI 报错。✅
+
+**已知风险/局限**：
+- `TryConsumeTarget` 用 `int.MinValue` 作哨兵；关卡索引恒为 0-4 小正整数，无碰撞风险（Minor，规格既定设计）。
+- `EnterLevel` 与三个运行时按钮的验证通过等价方式完成：`SetTarget` + 进 Play 验 boot 链路；三方法直接调用验运行时行为。未模拟 IMGUI 鼠标点击本身（MCP 不支持点 IMGUI 按钮），但所调用的方法与窗口按钮绑定的方法一致（Task 4 审查确认绑定正确）。
+- 发布版零残留：`LevelTestBoot` 整类 + `LevelManager` 调用行均 `#if UNITY_EDITOR` 包裹；编译期无 error 间接佐证边界对齐（构建期不存在不可达引用）。未实际出 Windows 构建验证（超出本机验收范围）。
