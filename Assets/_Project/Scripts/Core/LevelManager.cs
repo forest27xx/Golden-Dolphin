@@ -29,6 +29,9 @@ namespace MemoryTower
         private void Start()
         {
             EnsureInitialized();
+#if UNITY_EDITOR
+            LevelTestBoot.TryApplyTestTarget();
+#endif
             StartLevel(GameState.Instance.requestedLevelIndex);
         }
 
