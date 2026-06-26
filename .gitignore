@@ -41,7 +41,8 @@ Desktop.ini
 .tools/
 .agents/
 .codex/
-AGENTS.md
+AGENTS.local.md
+CLAUDE.local.md
 
 # Local packages and exports
 *.unitypackage
