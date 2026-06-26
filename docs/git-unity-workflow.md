@@ -1,7 +1,7 @@
 # 05 Git 与 Unity 协作规范
 
 适用仓库：`forest27xx/Golden-Dolphin`  
-Unity 版本：`2022.3.74f1 LTS`  
+Unity 版本：`6000.3.18f1`  
 目标：多人协作时，保证每个人能稳定拉取、打开、开发、合并，不把 Unity 本地缓存和大体积构建产物塞进 Git。
 
 ## 1. 分支策略
@@ -343,7 +343,7 @@ git lfs install
 git lfs pull
 ```
 
-然后用 Unity Hub 选择 Unity `2022.3.74f1 LTS` 打开仓库根目录。第一次打开会生成 `Library/`，不要提交。
+然后用 Unity Hub 选择 Unity `6000.3.18f1` 打开仓库根目录。第一次打开会生成 `Library/`，不要提交。
 
 ## 12. PR 合并前检查清单
 

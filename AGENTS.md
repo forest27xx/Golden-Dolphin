@@ -4,7 +4,7 @@ NOTE: Team members can create AGENTS.local.md for personal overrides — it's gi
 
 ## Project Overview
 
-Golden-Dolphin is the Unity project for 塔楼牌 Turrot, a 2D card-and-collapse game built with Unity 2022.3.74f1 and URP 2D.
+Golden-Dolphin is the Unity project for 塔楼牌 Turrot, a 2D card-and-collapse game built with Unity 6000.3.18f1 and URP 2D.
 
 The current demo is the Memory Tower / 记忆危楼 MVP. Keep changes aligned with the playable slice documented in:
 
