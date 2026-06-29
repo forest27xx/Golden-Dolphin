@@ -91,11 +91,18 @@ namespace MemoryTower
                 block.state = BlockState.Damaged;
             }
 
+            if (result.hpChanged && !block.IsCollapsed)
+            {
+                AudioEvents.RequestSfx(SfxType.BlockDamaged);
+            }
+
             return result;
         }
 
         public List<BlockModel> RunSupportCheck()
         {
+            AudioEvents.RequestSfx(SfxType.SupportCheck);
+
             List<BlockModel> collapsed = new List<BlockModel>();
 
             for (int row = 1; row < Rows; row++)
@@ -127,6 +134,7 @@ namespace MemoryTower
                     {
                         block.unstableTicks = 1;
                         block.state = BlockState.Unstable;
+                        AudioEvents.RequestSfx(SfxType.UnstableWarning);
                     }
                 }
             }
@@ -248,6 +256,7 @@ namespace MemoryTower
             block.state = BlockState.Collapsed;
             block.unstableTicks = 0;
             newlyCollapsed.Add(block);
+            AudioEvents.RequestSfx(SfxType.BlockCollapsed);
         }
     }
 }

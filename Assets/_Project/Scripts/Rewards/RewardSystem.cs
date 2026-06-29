@@ -37,6 +37,11 @@ namespace MemoryTower
             }
 
             FragmentsThisLevel += gained;
+            if (gained > 0)
+            {
+                AudioEvents.RequestSfx(SfxType.FragmentGained);
+            }
+
             return gained;
         }
     }

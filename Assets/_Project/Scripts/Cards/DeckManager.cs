@@ -72,6 +72,11 @@ namespace MemoryTower
                 drawn++;
             }
 
+            if (drawn > 0)
+            {
+                AudioEvents.RequestSfx(SfxType.CardDrawn);
+            }
+
             return drawn;
         }
 

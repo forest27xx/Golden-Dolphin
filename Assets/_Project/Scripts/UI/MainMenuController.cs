@@ -9,10 +9,17 @@ namespace MemoryTower
         private RectTransform popupPanel;
         private Text popupTitle;
         private Text popupBody;
+        private RectTransform settingsPanel;
+        private Slider masterSlider;
+        private Slider bgmSlider;
+        private Slider sfxSlider;
+        private Button muteButton;
+        private Text muteButtonText;
 
         private void Start()
         {
             BuildMenu();
+            AudioEvents.RequestBgm("MainMenu");
         }
 
         private void BuildMenu()
@@ -45,6 +52,7 @@ namespace MemoryTower
             UiFactory.SetAnchors(note.rectTransform, new Vector2(0.08f, 0.06f), new Vector2(0.92f, 0.12f), Vector2.zero, Vector2.zero);
 
             BuildPopup(canvas.transform);
+            BuildSettingsPanel(canvas.transform);
         }
 
         private void AddMenuButton(Transform parent, string label, UnityEngine.Events.UnityAction action, bool interactable)
@@ -80,6 +88,7 @@ namespace MemoryTower
 
         private void StartNewGame()
         {
+            AudioEvents.RequestBgm("Game");
             GameState.Instance.ResetProgress();
             SaveManager.Clear();
             SceneManager.LoadScene("Game");
@@ -87,13 +96,14 @@ namespace MemoryTower
 
         private void ContinueGame()
         {
+            AudioEvents.RequestBgm("Game");
             SaveManager.Load(GameState.Instance);
             SceneManager.LoadScene("Game");
         }
 
         private void ShowSettings()
         {
-            ShowPopup("设置", "占位设置面板\n\n主音量：100%\n音乐音量：100%\n音效音量：100%\n震屏：开启\n跳过已读剧情：关闭");
+            ShowSettingsPanel();
         }
 
         private void ShowCredits()
@@ -110,7 +120,135 @@ namespace MemoryTower
 
         private void HidePopup()
         {
-            popupPanel.gameObject.SetActive(false);
+            if (popupPanel != null)
+            {
+                popupPanel.gameObject.SetActive(false);
+            }
+
+            if (settingsPanel != null)
+            {
+                settingsPanel.gameObject.SetActive(false);
+            }
+        }
+
+        private void BuildSettingsPanel(Transform parent)
+        {
+            settingsPanel = UiFactory.CreateSpritePanel("SettingsPanel", parent, VisualAssets.PanelResult, new Color(0.04f, 0.05f, 0.06f, 0.98f), true);
+            UiFactory.SetAnchors(settingsPanel, new Vector2(0.32f, 0.18f), new Vector2(0.68f, 0.82f), Vector2.zero, Vector2.zero);
+            VerticalLayoutGroup layout = settingsPanel.gameObject.AddComponent<VerticalLayoutGroup>();
+            layout.padding = new RectOffset(30, 30, 30, 30);
+            layout.spacing = 18;
+            layout.childControlWidth = true;
+            layout.childForceExpandWidth = true;
+            layout.childForceExpandHeight = false;
+
+            Text title = UiFactory.CreateText("SettingsTitle", settingsPanel, "设置", 38, TextAnchor.MiddleCenter, Color.white);
+            title.gameObject.AddComponent<LayoutElement>().preferredHeight = 60f;
+
+            AudioManager audioManager = AudioManager.Instance;
+
+            masterSlider = CreateVolumeSlider(settingsPanel, "主音量", audioManager.MasterVolume, audioManager.SetMasterVolume);
+            bgmSlider = CreateVolumeSlider(settingsPanel, "音乐音量", audioManager.BgmVolume, audioManager.SetBgmVolume);
+            sfxSlider = CreateVolumeSlider(settingsPanel, "音效音量", audioManager.SfxVolume, audioManager.SetSfxVolume);
+
+            muteButton = UiFactory.CreateButton("MuteButton", settingsPanel, audioManager.IsMuted ? "取消静音" : "静音", audioManager.ToggleMute);
+            muteButton.gameObject.AddComponent<LayoutElement>().preferredHeight = 56f;
+            muteButtonText = muteButton.GetComponentInChildren<Text>();
+
+            Button close = UiFactory.CreateButton("CloseSettings", settingsPanel, "关闭", HidePopup);
+            close.gameObject.AddComponent<LayoutElement>().preferredHeight = 56f;
+
+            settingsPanel.gameObject.SetActive(false);
+        }
+
+        private Slider CreateVolumeSlider(Transform parent, string label, float initialValue, UnityEngine.Events.UnityAction<float> onValueChanged)
+        {
+            GameObject row = new GameObject(label + "Row");
+            row.transform.SetParent(parent, false);
+            VerticalLayoutGroup rowLayout = row.AddComponent<VerticalLayoutGroup>();
+            rowLayout.spacing = 6;
+            rowLayout.childControlWidth = true;
+            rowLayout.childForceExpandWidth = true;
+            rowLayout.childForceExpandHeight = false;
+            rowLayout.childAlignment = TextAnchor.UpperLeft;
+
+            Text labelText = UiFactory.CreateText(label + "Label", row.transform, label, 24, TextAnchor.MiddleLeft, Color.white);
+            labelText.gameObject.AddComponent<LayoutElement>().preferredHeight = 32f;
+
+            GameObject sliderObj = new GameObject(label + "Slider");
+            sliderObj.transform.SetParent(row.transform, false);
+            RectTransform sliderRect = sliderObj.AddComponent<RectTransform>();
+            sliderRect.sizeDelta = new Vector2(0, 40f);
+
+            Image trackImage = sliderObj.AddComponent<Image>();
+            trackImage.color = new Color(0.15f, 0.16f, 0.18f, 1f);
+            trackImage.raycastTarget = true;
+
+            Slider slider = sliderObj.AddComponent<Slider>();
+            slider.minValue = 0f;
+            slider.maxValue = 1f;
+            slider.value = initialValue;
+            slider.onValueChanged.AddListener(onValueChanged);
+            slider.targetGraphic = trackImage;
+
+            GameObject fillObj = new GameObject("Fill");
+            fillObj.transform.SetParent(sliderObj.transform, false);
+            RectTransform fillRect = fillObj.AddComponent<RectTransform>();
+            fillRect.anchorMin = Vector2.zero;
+            fillRect.anchorMax = Vector2.one;
+            fillRect.offsetMin = Vector2.zero;
+            fillRect.offsetMax = Vector2.zero;
+            Image fillImage = fillObj.AddComponent<Image>();
+            fillImage.color = new Color(0.9f, 0.76f, 0.28f, 0.9f);
+            slider.fillRect = fillRect;
+
+            GameObject handleObj = new GameObject("Handle");
+            handleObj.transform.SetParent(sliderObj.transform, false);
+            RectTransform handleRect = handleObj.AddComponent<RectTransform>();
+            handleRect.sizeDelta = new Vector2(20f, 20f);
+            Image handleImage = handleObj.AddComponent<Image>();
+            handleImage.color = Color.white;
+            handleImage.raycastTarget = true;
+            slider.handleRect = handleRect;
+            slider.direction = Slider.Direction.LeftToRight;
+
+            return slider;
+        }
+
+        private void ShowSettingsPanel()
+        {
+            if (settingsPanel == null)
+            {
+                return;
+            }
+
+            if (popupPanel != null)
+            {
+                popupPanel.gameObject.SetActive(false);
+            }
+
+            AudioManager audioManager = AudioManager.Instance;
+            if (masterSlider != null)
+            {
+                masterSlider.value = audioManager.MasterVolume;
+            }
+
+            if (bgmSlider != null)
+            {
+                bgmSlider.value = audioManager.BgmVolume;
+            }
+
+            if (sfxSlider != null)
+            {
+                sfxSlider.value = audioManager.SfxVolume;
+            }
+
+            if (muteButtonText != null)
+            {
+                muteButtonText.text = audioManager.IsMuted ? "取消静音" : "静音";
+            }
+
+            settingsPanel.gameObject.SetActive(true);
         }
 
         private void QuitGame()
