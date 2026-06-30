@@ -104,7 +104,7 @@ namespace MemoryTower.EditorTools
                 }
             }
 
-            Dictionary<string, CardConfig> cards = BuiltInConfigs.CreateCardLookup();
+            Dictionary<string, CardConfig> cards = ConfigLoader.CreateCardLookup();
             foreach (CardConfig card in cards.Values)
             {
                 if (VisualAssets.CardSprite(card, false) == null)
@@ -118,12 +118,12 @@ namespace MemoryTower.EditorTools
         {
             SaveManager.Clear();
             GameState.Instance.ResetProgress();
-            Dictionary<string, CardConfig> cards = BuiltInConfigs.CreateCardLookup();
+            Dictionary<string, CardConfig> cards = ConfigLoader.CreateCardLookup();
 
-            for (int levelIndex = 0; levelIndex < BuiltInConfigs.Levels.Count; levelIndex++)
+            for (int levelIndex = 0; levelIndex < ConfigLoader.LevelCount; levelIndex++)
             {
                 levelManager.StartLevel(levelIndex);
-                LevelConfig level = BuiltInConfigs.Levels[levelIndex];
+                LevelConfig level = ConfigLoader.GetLevel(levelIndex);
                 BuildingModel building = GetPrivateField<BuildingModel>(levelManager, "buildingModel");
                 DeckManager deck = GetPrivateField<DeckManager>(levelManager, "deckManager");
 
@@ -170,7 +170,7 @@ namespace MemoryTower.EditorTools
                 }
             }
 
-            if (GameState.Instance.completedLevelIds.Count != BuiltInConfigs.Levels.Count)
+            if (GameState.Instance.completedLevelIds.Count != ConfigLoader.LevelCount)
             {
                 throw new System.Exception("Smoke test failed: scripted playthrough did not mark every level complete.");
             }
@@ -179,8 +179,8 @@ namespace MemoryTower.EditorTools
         private static void AssertFinalWeakHintFlow(LevelManager levelManager)
         {
             GameState.Instance.ResetProgress();
-            Dictionary<string, CardConfig> cards = BuiltInConfigs.CreateCardLookup();
-            int finalIndex = BuiltInConfigs.Levels.Count - 1;
+            Dictionary<string, CardConfig> cards = ConfigLoader.CreateCardLookup();
+            int finalIndex = ConfigLoader.LevelCount - 1;
             levelManager.StartLevel(finalIndex);
 
             BuildingModel building = GetPrivateField<BuildingModel>(levelManager, "buildingModel");
