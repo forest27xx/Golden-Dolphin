@@ -47,6 +47,9 @@ namespace MemoryTower
             weakHintUses = 0;
             outcome = LevelOutcome.Playing;
 
+            AudioEvents.RequestSfx(SfxType.LevelStart);
+            AudioEvents.RequestBgm("Game");
+
             buildingModel.Generate(currentLevel);
             collapseSystem.Initialize(currentLevel.collapseThreshold);
             rewardSystem.Initialize();
@@ -82,6 +85,7 @@ namespace MemoryTower
 
             if (card.RequiresTarget)
             {
+                AudioEvents.RequestSfx(SfxType.CardSelected);
                 selectedHandIndex = handIndex;
                 RefreshUi("已选择「" + card.displayName + "」，请选择一个建筑方块。");
                 return;
@@ -155,6 +159,7 @@ namespace MemoryTower
 
             selectedHandIndex = -1;
             actionsRemaining--;
+            AudioEvents.RequestSfx(SfxType.HandRedrawn);
             deckManager.RedrawHand(HandLimit);
             collapseSystem.Add(replaced);
             noDamageActionCount++;
@@ -178,6 +183,7 @@ namespace MemoryTower
             if (deckManager.AddCardToHand(coreFracture, HandLimit))
             {
                 weakHintUses++;
+                AudioEvents.RequestSfx(SfxType.WeakHint);
                 RefreshUi("你听见危楼深处的回声：「核心裂解」已加入手牌，它只能打红色核心。");
             }
             else
@@ -222,6 +228,7 @@ namespace MemoryTower
             }
 
             selectedHandIndex = -1;
+            AudioEvents.RequestSfx(SfxType.CardPlayed);
             CardResolution resolution = cardEffectResolver.Resolve(card, target, buildingModel, collapseSystem, rewardSystem);
             deckManager.RemoveFromHand(handIndex, card.isOneShot);
             actionsRemaining--;
@@ -288,6 +295,7 @@ namespace MemoryTower
             if (victory)
             {
                 outcome = LevelOutcome.Victory;
+                AudioEvents.RequestSfx(SfxType.Victory);
                 GameState.Instance.MarkLevelComplete(currentLevel, currentLevelIndex, rewardSystem.FragmentsThisLevel);
                 SaveManager.Save(GameState.Instance);
                 uiManager.ShowResult(true, CreateVictoryMessage(), currentLevelIndex + 1 < BuiltInConfigs.Levels.Count, this);
@@ -307,6 +315,7 @@ namespace MemoryTower
             if (defeat)
             {
                 outcome = LevelOutcome.Defeat;
+                AudioEvents.RequestSfx(SfxType.Defeat);
                 uiManager.ShowResult(false, CreateDefeatMessage(), false, this);
             }
         }
