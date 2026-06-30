@@ -41,7 +41,7 @@ namespace MemoryTower
 
             GameState state = GameState.Instance;
             state.ResetProgress();
-            foreach (CardConfig card in BuiltInConfigs.Cards)
+            foreach (CardConfig card in ConfigLoader.Cards)
             {
                 state.unlockedCardIds.Add(card.id);
             }

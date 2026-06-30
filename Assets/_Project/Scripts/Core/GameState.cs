@@ -51,9 +51,9 @@ namespace MemoryTower
             }
 
             requestedLevelIndex = levelIndex + 1;
-            if (requestedLevelIndex >= BuiltInConfigs.Levels.Count)
+            if (requestedLevelIndex >= ConfigLoader.LevelCount)
             {
-                requestedLevelIndex = BuiltInConfigs.Levels.Count - 1;
+                requestedLevelIndex = ConfigLoader.LevelCount - 1;
             }
         }
     }

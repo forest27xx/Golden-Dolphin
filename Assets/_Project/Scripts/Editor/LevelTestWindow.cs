@@ -119,7 +119,7 @@ namespace MemoryTower.EditorTools
             EditorGUILayout.EndHorizontal();
 
             int currentIndex = CurrentLevelIndex();
-            List<LevelConfig> levels = BuiltInConfigs.Levels;
+            List<LevelConfig> levels = ConfigLoader.Levels;
             for (int i = 0; i < levels.Count; i++)
             {
                 LevelConfig level = levels[i];

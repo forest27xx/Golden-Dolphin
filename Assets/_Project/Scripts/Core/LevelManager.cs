@@ -38,9 +38,9 @@ namespace MemoryTower
         public void StartLevel(int levelIndex)
         {
             EnsureInitialized();
-            currentLevelIndex = Mathf.Clamp(levelIndex, 0, BuiltInConfigs.Levels.Count - 1);
+            currentLevelIndex = Mathf.Clamp(levelIndex, 0, ConfigLoader.LevelCount - 1);
             GameState.Instance.requestedLevelIndex = currentLevelIndex;
-            currentLevel = BuiltInConfigs.Levels[currentLevelIndex];
+            currentLevel = ConfigLoader.GetLevel(currentLevelIndex);
             actionsRemaining = currentLevel.actionCount;
             selectedHandIndex = -1;
             noDamageActionCount = 0;
@@ -199,7 +199,7 @@ namespace MemoryTower
 
         public void NextLevel()
         {
-            if (currentLevelIndex + 1 >= BuiltInConfigs.Levels.Count)
+            if (currentLevelIndex + 1 >= ConfigLoader.LevelCount)
             {
                 ReturnToMenu();
                 return;
@@ -298,7 +298,7 @@ namespace MemoryTower
                 AudioEvents.RequestSfx(SfxType.Victory);
                 GameState.Instance.MarkLevelComplete(currentLevel, currentLevelIndex, rewardSystem.FragmentsThisLevel);
                 SaveManager.Save(GameState.Instance);
-                uiManager.ShowResult(true, CreateVictoryMessage(), currentLevelIndex + 1 < BuiltInConfigs.Levels.Count, this);
+                uiManager.ShowResult(true, CreateVictoryMessage(), currentLevelIndex + 1 < ConfigLoader.LevelCount, this);
                 return;
             }
 
@@ -333,7 +333,7 @@ namespace MemoryTower
         private IEnumerable<string> BuildDeckIdsForLevel(int levelIndex)
         {
             List<string> result = new List<string>();
-            LevelConfig level = BuiltInConfigs.Levels[levelIndex];
+            LevelConfig level = ConfigLoader.GetLevel(levelIndex);
             foreach (string cardId in level.initialDeckCardIds)
             {
                 CardConfig card;
@@ -409,7 +409,7 @@ namespace MemoryTower
         {
             if (cardLookup == null)
             {
-                cardLookup = BuiltInConfigs.CreateCardLookup();
+                cardLookup = ConfigLoader.CreateCardLookup();
             }
 
             if (uiManager == null)

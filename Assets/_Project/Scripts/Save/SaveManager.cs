@@ -48,7 +48,7 @@ namespace MemoryTower
                 }
 
                 state.ResetProgress();
-                state.requestedLevelIndex = Mathf.Clamp(data.requestedLevelIndex, 0, BuiltInConfigs.Levels.Count - 1);
+                state.requestedLevelIndex = Mathf.Clamp(data.requestedLevelIndex, 0, ConfigLoader.LevelCount - 1);
                 state.totalFragments = Mathf.Max(0, data.totalFragments);
 
                 state.completedLevelIds.Clear();
